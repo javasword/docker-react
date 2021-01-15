@@ -1,0 +1,10 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - docker build -t traviscibuiltimage -f Dockerfile.dev .
+script:
+  - docker run -e CI=true traviscibuiltimage npm run test -- --coverage
